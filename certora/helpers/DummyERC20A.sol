@@ -11,4 +11,4 @@ enum TokenType {
 }
 
 // contract DummyERC20A is DummyERC20Impl {}
-contract DummyERC20A is DummyMintableERC20Impl {}
+contract DummyERC20A is DummyBoringERC20Impl {}
