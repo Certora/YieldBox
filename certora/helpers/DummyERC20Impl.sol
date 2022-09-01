@@ -54,8 +54,21 @@ contract DummyERC20Impl {
         a[sender][msg.sender] = sub(a[sender][msg.sender], amount);
         return true;
     }
+}
 
-    function mint(address account, uint256 amount) external {
+contract DummyMintableERC20Impl is DummyERC20Impl {
+    address public minter;
+
+    modifier onlyMinter() {
+        require (msg.sender == minter, "Mint callable by minter only");
+        _;
+    }
+
+    // constructor (address _minter) {
+    //     minter = _minter;
+    // }
+
+    function mint(address account, uint256 amount) external onlyMinter() {
         _mint(account, amount);
     }
 
@@ -63,4 +76,6 @@ contract DummyERC20Impl {
         t += amount;
         b[user] += amount;
     }
+
 }
+
